@@ -12,6 +12,10 @@ public class DestroyObject : MonoBehaviour
     GameObject effectPrefab2;
     public int objectHP;
 
+    //ドロップアイテム
+    [SerializeField]
+    private GameObject[] itemPrefabs;
+
     // このメソッドはぶつかった瞬間に呼び出される
     private void OnTriggerEnter(Collider other)
     {
@@ -39,6 +43,19 @@ public class DestroyObject : MonoBehaviour
                 Destroy(this.gameObject);
 
                 Debug.Log("Destroy!");
+
+                // アイテム数が「3個」の場合、itemNumberの中には「0」「1」「2」のいずれかの数字が入る。
+                int itemNumber = Random.Range(0, itemPrefabs.Length);
+
+                //アイテムドロップ
+                // （ポイント）pos.y + 0.6fの部分でアイテムの出現場所の『高さ』を調整しています。
+                Vector3 pos = transform.position;
+                if (itemPrefabs.Length != 0)
+                {
+                    // （ポイント）itemNumberの数字によって出るアイテムが変化する。
+                    Instantiate(itemPrefabs[itemNumber], new Vector3(pos.x, pos.y + 0.6f, pos.z), Quaternion.identity);
+                }
+                
             }
 
             

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TankHealth : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class TankHealth : MonoBehaviour
     GameObject effectPrefab2;
 
     public int tankHP;
+    [SerializeField]
+    private Text HPLabel;
+
+    // HPの最大値を設定する（最大値は自由）
+    public int tankMaxHP = 10;
 
     void GoToGameOver()
     {
@@ -24,6 +30,8 @@ public class TankHealth : MonoBehaviour
         {
             // HPを１ずつ減少させる。
             tankHP -= 1;
+            //UIに反映させる
+            HPLabel.text = "HP:" + tankHP;
 
             // ぶつかってきた相手方（敵の砲弾）を破壊する。
             Destroy(other.gameObject);
@@ -52,10 +60,26 @@ public class TankHealth : MonoBehaviour
         }
     }
 
-     // Start is called before the first frame update
+    // publicをつけること（重要ポイント）
+    public void AddHP(int amount)
+    {
+        tankHP += amount;
+
+        // 最大HP以上にならないように
+        if (tankHP > tankMaxHP)
+        {
+            tankHP = tankMaxHP;
+        }
+
+        HPLabel.text = "HP:" + tankHP;
+    }
+
+    // Start is called before the first frame update
     void Start()
     {
-        
+        tankHP = tankMaxHP;
+        //現HP表示
+        HPLabel.text = "HP:" + tankHP;
     }
 
     // Update is called once per frame
