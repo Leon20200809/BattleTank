@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ShotShell : MonoBehaviour
 {
+    //弾速
     public float shotSpeed;
 
     // privateの状態でもInspector上から設定できるようにするテクニック。
@@ -15,7 +16,7 @@ public class ShotShell : MonoBehaviour
     private AudioClip shotSound = null;
 
     //発射間隔
-    private float timeBetweenShot = 0.75f;
+    private float timeBetweenShot = 1.0f;
     private float timer;
 
     //残弾
@@ -63,7 +64,7 @@ public class ShotShell : MonoBehaviour
 
             // 発射した砲弾を３秒後に破壊する。
             // （重要な考え方）不要になった砲弾はメモリー上から削除すること。
-            Destroy(shell, 2.0f);
+            Destroy(shell, 3.0f);
 
             // 砲弾の発射音を出す。
             AudioSource.PlayClipAtPoint(shotSound, transform.position);

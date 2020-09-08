@@ -10,11 +10,15 @@ public class TanKMovement : MonoBehaviour
     //旋回速度
     public float turnSpeed;
 
+    //回避速度
+    public float avoidanceSpeed;
+
     Rigidbody rb;
 
     //
     float movementInputValue;
     float turnInputValue;
+    float avoidanceValue;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +32,11 @@ public class TanKMovement : MonoBehaviour
         //TankMoveを呼ぶ
         TankMove();
         //TankTurnを呼ぶ
-        TankTurn();
+        //TankTurn();
+
+        //TankAvoidanceを呼ぶ
+        TankAvoidance();
+        //TankAvoidanceL();
     }
 
     //前進・後退のメソッド
@@ -46,5 +54,20 @@ public class TanKMovement : MonoBehaviour
         float turn = turnInputValue * turnSpeed * Time.deltaTime;
         Quaternion turnRotation = Quaternion.Euler(0, turn, 0);
         rb.MoveRotation(rb.rotation * turnRotation);
+    }
+
+    //回避メソッド
+    void TankAvoidance()
+    {
+        avoidanceValue = Input.GetAxis("Horizontal");
+        Vector3 avoid = transform.right * avoidanceValue * avoidanceSpeed * Time.deltaTime;
+        rb.MovePosition(rb.position + avoid);
+    }
+
+    void TankAvoidanceL()
+    {
+        Input.GetKeyDown(KeyCode.A);
+        Vector3 avoid = -transform.right * avoidanceValue * avoidanceSpeed * Time.deltaTime;
+        rb.MovePosition(rb.position + avoid);
     }
 }
