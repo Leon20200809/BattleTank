@@ -16,6 +16,11 @@ public class DestroyObject : MonoBehaviour
     [SerializeField]
     private GameObject[] itemPrefabs;
 
+    // これが敵を倒すと得られる点数になる
+    [SerializeField]
+    private int scoreValue; 
+    private ScoreManager sm;
+
     // このメソッドはぶつかった瞬間に呼び出される
     private void OnTriggerEnter(Collider other)
     {
@@ -55,7 +60,10 @@ public class DestroyObject : MonoBehaviour
                     // （ポイント）itemNumberの数字によって出るアイテムが変化する。
                     Instantiate(itemPrefabs[itemNumber], new Vector3(pos.x, pos.y + 0.6f, pos.z), Quaternion.identity);
                 }
-                
+
+                //敵撃破スコア加算
+                sm.AddScore(scoreValue);
+
             }
 
             
@@ -65,7 +73,8 @@ public class DestroyObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // 「ScoreLabelオブジェクト」に付いている「ScoreManagerスクリプト」の情報を取得して「sm」の箱に入れる。
+        sm = GameObject.Find("ScoreLabel").GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame

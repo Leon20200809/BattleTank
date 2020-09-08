@@ -79,7 +79,7 @@ public class TankHealth : MonoBehaviour
     {
         tankHP = tankMaxHP;
         //現HP表示
-        HPLabel.text = "HP:" + tankHP;
+        HPLabel.text = "ARMOUR : " + tankHP;
     }
 
     // Update is called once per frame

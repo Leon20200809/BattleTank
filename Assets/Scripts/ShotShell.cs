@@ -41,7 +41,7 @@ public class ShotShell : MonoBehaviour
         // 発射間隔タイマーの時間を動かす
         timer += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Space) && timer > timeBetweenShot && shotCount > 0)
+        if (Input.GetMouseButtonDown(0) && timer > timeBetweenShot && shotCount > 0)
         {
             //弾消費
             shotCount -= 1;

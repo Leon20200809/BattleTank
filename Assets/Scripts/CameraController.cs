@@ -18,6 +18,9 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private AudioListener FPSListener;
 
+    [SerializeField]
+    private GameObject aimImage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,9 @@ public class CameraController : MonoBehaviour
 
         mainListener.enabled = true; 
         FPSListener.enabled = false;
+
+        // （発想）主観カメラ（FPSカメラ）がオンの時だけ、照準器もオンにする。
+        aimImage.SetActive(false);
     }
 
     // Update is called once per frame
@@ -46,6 +52,10 @@ public class CameraController : MonoBehaviour
             mainListener.enabled = false;
             FPSListener.enabled = true;
 
+            // ★追加
+            aimImage.SetActive(true);
+
+
         } // もしも「Cボタン」を押した時、「かつ」、「mainCameraON」のステータスが「false」の時（条件）
         else if (Input.GetKeyDown(KeyCode.C) && mainCameraON == false)
         {
@@ -56,6 +66,8 @@ public class CameraController : MonoBehaviour
 
             mainListener.enabled = true;
             FPSListener.enabled = false;
+
+            aimImage.SetActive(false);
         }
     }
 }
