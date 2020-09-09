@@ -23,7 +23,7 @@ public class ShotShell : MonoBehaviour
     public int shotCount;
 
     [SerializeField]
-    Text shellLabel;
+    Text shellLabel = null;
 
     // 残弾数の最大値を設定する（最大値は自由）
     public int shotMaxCount = 50;
@@ -33,7 +33,7 @@ public class ShotShell : MonoBehaviour
     void Start()
     {
         shotCount = shotMaxCount;
-        shellLabel.text = "砲弾：" + shotCount;
+        shellLabel.text = "300mm Canon：" + shotCount;
     }
 
     // Update is called once per frame
@@ -48,7 +48,7 @@ public class ShotShell : MonoBehaviour
             shotCount -= 1;
 
             //UI更新
-            shellLabel.text = "砲弾：" + shotCount;
+            shellLabel.text = "300mm Canon：" + shotCount;
 
             // 発射間隔タイマーの時間を０に戻す。
             timer = 0.0f;
@@ -87,6 +87,6 @@ public class ShotShell : MonoBehaviour
         }
 
         // 回復をUIに反映させる。
-        shellLabel.text = "砲弾：" + shotCount;
+        shellLabel.text = "300mm Canon：" + shotCount;
     }
 }

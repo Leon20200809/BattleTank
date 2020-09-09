@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class TankHealth : MonoBehaviour
 {
     [SerializeField]
-    GameObject effectPrefab1;
+    GameObject effectPrefab1 = null;
     [SerializeField]
-    GameObject effectPrefab2;
+    GameObject effectPrefab2 = null;
 
     public int tankHP;
     [SerializeField]
-    private Text HPLabel;
+    private Text HPLabel = null;
 
     // HPの最大値を設定する（最大値は自由）
     public int tankMaxHP = 10;

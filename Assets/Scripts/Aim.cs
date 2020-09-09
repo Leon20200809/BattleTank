@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Aim : MonoBehaviour
 {
     [SerializeField]
-    private Image aimImage;
+    private Image aimImage = null;
 
     // Start is called before the first frame update
     void Start()

@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class ChaseEnemy : MonoBehaviour
 {
     [SerializeField]
-    private GameObject target;
-    private NavMeshAgent agent;
+    private GameObject target = null;
+    private NavMeshAgent agent = null;
 
     // Start is called before the first frame update
     void Start()

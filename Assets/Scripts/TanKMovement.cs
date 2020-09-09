@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class TanKMovement : MonoBehaviour
 {
@@ -10,15 +11,21 @@ public class TanKMovement : MonoBehaviour
     //旋回速度
     public float turnSpeed;
 
-    //回避速度
-    public float avoidanceSpeed;
+    //回避距離
+    public float avoiddistance;
 
     Rigidbody rb;
 
     //
     float movementInputValue;
     float turnInputValue;
-    float avoidanceValue;
+
+    [SerializeField]
+    private AudioClip avoidSound = null;
+
+    //エフェクトプレハブのデータを入れるための箱を作る。
+    [SerializeField]
+    private GameObject effectPrefab = null;
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +42,8 @@ public class TanKMovement : MonoBehaviour
         //TankTurn();
 
         //TankAvoidanceを呼ぶ
-        TankAvoidance();
-        //TankAvoidanceL();
+        TankAvoidanceL();
+        TankAvoidanceR();
     }
 
     //前進・後退のメソッド
@@ -57,17 +64,27 @@ public class TanKMovement : MonoBehaviour
     }
 
     //回避メソッド
-    void TankAvoidance()
+    void TankAvoidanceR()
     {
-        avoidanceValue = Input.GetAxis("Horizontal");
-        Vector3 avoid = transform.right * avoidanceValue * avoidanceSpeed * Time.deltaTime;
-        rb.MovePosition(rb.position + avoid);
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            transform.DOMove(transform.right * avoiddistance, 0.5f).SetRelative();
+            AudioSource.PlayClipAtPoint(avoidSound, transform.position);
+            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+            Destroy(effect, 1.0f);
+        }
     }
 
     void TankAvoidanceL()
     {
-        Input.GetKeyDown(KeyCode.A);
-        Vector3 avoid = -transform.right * avoidanceValue * avoidanceSpeed * Time.deltaTime;
-        rb.MovePosition(rb.position + avoid);
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            transform.DOMove(-transform.right * avoiddistance, 0.5f).SetRelative();
+            AudioSource.PlayClipAtPoint(avoidSound, transform.position);
+            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+            Destroy(effect, 1.0f);
+        }
+        
+
     }
 }

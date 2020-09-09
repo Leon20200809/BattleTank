@@ -8,10 +8,10 @@ public class EnemyShotShell : MonoBehaviour
     public float shotSpeed;
 
     [SerializeField]
-    GameObject enemyShellPrefab;
+    GameObject enemyShellPrefab = null;
 
     [SerializeField]
-    private AudioClip shotSound;
+    private AudioClip shotSound = null;
 
     //発射間隔
     int interval;
@@ -19,7 +19,7 @@ public class EnemyShotShell : MonoBehaviour
     // 何秒間停止させるかは自由
     public float stopTimer = 5.0f;
     [SerializeField]
-    private Text stopLabel;
+    private Text stopLabel = null;
 
     // Start is called before the first frame update
     void Start()
